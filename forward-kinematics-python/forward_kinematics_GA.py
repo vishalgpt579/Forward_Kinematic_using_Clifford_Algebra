@@ -8,7 +8,7 @@ locals().update(blades) # making the symbolic blades 'e1', 'e12', local instance
 import warnings
 warnings.filterwarnings("ignore")
 
-## 
+## 	
 ## Rotor = cos(Q)-sin(Q)*bivector
 ##
 # def generate_rotation_rotor(theta, euc_vector_m, euc_vector_n):
@@ -29,9 +29,9 @@ def main():
 	l0 = 2 # units length
 	l1 = 2 # units length
 	l2 = 2 # units length
-	theta0 = np.radians(45)
-	theta1 = np.radians(30)
-	theta2 = np.radians(-45)
+	theta0 = np.radians(0)
+	theta1 = np.radians(45)
+	theta2 = np.radians(30)
 
 	print("\n\nTesting R configuration with angle {0} and rotation about plane {1}...".format(30,e1^e2))
 	R0 = generate_rotation_rotor(theta0,e1,e2)

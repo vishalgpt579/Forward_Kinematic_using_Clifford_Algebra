@@ -85,7 +85,7 @@ display(EE2);
 
 %% R _|_ R configuration
 
-clear all;clc;
+% clear all;clc;
 disp('Initialising Clifford signature (3,0)')
 clifford_signature(3,0);
 

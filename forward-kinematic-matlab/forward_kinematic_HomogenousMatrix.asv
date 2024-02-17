@@ -132,10 +132,6 @@ t1 = 0; % no base momemts
 t2 = 45;
 t3 = 30;
 
-px=vpa(subs(H(1,4),[the0,the1,the2],[t1,t2,t3]));
-py=vpa(subs(H(2,4),[the0,the1, the2],[t1,t2,t3]));
-pz=vpa(subs(H(3,4),[the0,the1,the2],[t1,t2,t3]));
-
-disp(px);
-disp(py);
-disp(pz);
+px=vpa(subs(H(1,4),[the0,the1],[t1,t2]))
+py=vpa(subs(H(2,4),[the0,the1],[t1,t2]))
+pz=vpa(subs(H(3,4),[the0,the1],[t1,t2]))
