@@ -136,10 +136,9 @@ pz=vpa(subs(H(3,4),[the0,the1,the2],[t1,t2,t3]));
 % fprintf("Expected position: %d %d %d \n",px,py,pz);
 fprintf("Solving Inverse Kinematics(IK)...\n");
 [theta1,theta2,theta3] = solve(H(1,4)==px,H(2,4)==py,H(3,4)==pz,the0,the1,the2);
-% solve(H(1,4)==px,H(2,4)==py,H(3,4)==pz,the0,the1,the2);
 
 Theta1=vpa(rad2deg(theta1));
-Theta2=vpa(rad2deg(theta2));
+Theta2=vpa(rad2deg(Theta2));
 Theta3=vpa(rad2deg(theta3));
 solution = [Theta1,Theta2,Theta3];
 fprintf("Calculated solution for IK is(are):\n")
