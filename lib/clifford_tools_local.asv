@@ -1,0 +1,39 @@
+function tool = clifford_tools_local
+%CLIFFORD_TOOLS_LOCAL Summary of this function goes here
+%   Functions
+%   Defining a rotor
+%   angle of rotation in radian. 
+%   mv1: vector that needs to be rotated. 
+%   mv2: vector that mv1 is to be rotated about.
+tool.rotor = @rotor;
+outputArg2 = inputArg2;
+end
+
+
+function R = rotor(angle,mv1,mv2)
+    % Normalised the multivector1, i.e, the initial vector
+    mv1 = unit(mv1);% or mv1 = mv1/abs(mv1);
+    % Normalised the multivector1, i.e, the final rotated vector
+    mv2 = unit(mv2); % or mv2 = mv2/abs(mv2);
+    
+    mv1WedgeMv2 = mv1*mv2; %creating a bi-vector
+    mv1WedgeMv2 = unit(mv1WedgeMv2); % or mv1WedgeMv2 = mv1WedgeMv2/abs(mv1WedgeMv2)
+
+    R = cos(angle/2) - mv1WedgeMv2*sin(angle/2);
+end
+
+% % Defining function to 
+% % convert vector to multivector: up
+% % Reconvert a multivector to vector: down
+% % Reference: https://clifford.readthedocs.io/en/latest/tutorials/cga/index.html
+
+% Project a multivector to conformal space (GA-->CGA)
+function mv_conformal = up(mv)
+    mv_conformal = mv + (0.5*(mv^2)*ei) + eo;
+end
+
+% Projection from CGA to GA
+function mv = down(mv_conformal)
+    mv_conformal = unit(mv_conformal);
+    mv = mv_conformal*eo*inv(eo);
+end
