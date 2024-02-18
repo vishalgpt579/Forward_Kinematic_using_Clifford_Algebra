@@ -3,7 +3,7 @@
 % using Geometric Algebra
 % with the help of Clifford Multivector Toolbox library.
 
-disp('Initialising Clifford signature (3,0)')
+disp('Initialising Clifford signature (3,0)');
 clifford_signature(3,0);
 
 % Testing simple Reflection of x =(1,1) on y=0 or y-axis

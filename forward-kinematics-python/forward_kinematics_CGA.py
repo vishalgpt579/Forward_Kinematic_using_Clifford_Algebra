@@ -34,6 +34,7 @@ def main():
 	R = R0*R1*Rl1*R2*Rl2
 	EE = down(R*up(eo)*~R)
 	print("The end-effector for R_|_R || R Config is at: ",EE)
+	print("The resultant rotor: \n",R)
 
 
 if __name__ == '__main__':
