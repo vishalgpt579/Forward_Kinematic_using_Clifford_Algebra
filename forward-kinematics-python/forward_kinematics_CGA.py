@@ -32,9 +32,11 @@ def main():
 	R2 = generate_rotation_rotor(theta2,e1,e2)
 	Rl2 = 1 - 0.5*l2*(e1^einf)
 	R = R0*R1*Rl1*R2*Rl2
-	EE = down(R*up(eo)*~R)
+	EE = down(R*up(eo)*~R) 
+	# EE2 = down(apply_rotor(up(eo),R))
 	print("The end-effector for R_|_R || R Config is at: ",EE)
-	print("The resultant rotor: \n",R)
+	# print("The resultant rotor: \n",R)
+	# print("Using inbuild func, EE: ",EE2) ## Same as EE
 
 
 if __name__ == '__main__':

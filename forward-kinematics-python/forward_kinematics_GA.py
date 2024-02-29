@@ -59,7 +59,7 @@ def main():
 	EE1 = EE0 + R01*(l1*e1)*R01.inv()
 	print("The end effector for R_|_R Config is at: ",EE1)
 
-	## NOT TESTED YET :/
+	## TESTED
 	print("\nTesting R _|_ R || R configuration...")
 	R0 = generate_rotation_rotor(theta0,e1,e3)
 	EE0 = R0*(l0*e2)*R0.inv()
@@ -71,7 +71,8 @@ def main():
 	EE2 = EE1 + R02*(l1*e1)*R02.inv()
 	print("The end effector for R_|_R || R Config is at: ",EE2)
 
-	## NOT TESTED YET :/
+	## TESTED but results obtained were from using a slightly different equation then expected.
+	## Reference: https://slides.com/hugohadfield/game2020#/18
 	print("\nTesting R _|_ R || R configuration similar to clifford docs...")
 	R0 = generate_rotation_rotor(theta0,e1,e3)
 	R1 = generate_rotation_rotor(theta1,e1,e2)
