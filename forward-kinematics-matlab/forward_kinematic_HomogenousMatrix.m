@@ -129,8 +129,8 @@ H = simplify(H01*H12*H23);
 % Computing the EE's Px, Py & Pz(essentially H[1:3,4])
 
 t1 = 0; % no base momemts
-t2 = 45;
-t3 = 30;
+t2 = 30;
+t3 = -45;
 
 px=vpa(subs(H(1,4),[the0,the1,the2],[t1,t2,t3]));
 py=vpa(subs(H(2,4),[the0,the1, the2],[t1,t2,t3]));

@@ -8,8 +8,8 @@ t = clifford_tools_local;
 r1 = t.rotor(deg2rad(0),e1,e3);
 r2 = t.rotor(deg2rad(45),e1,e2);
 r = r1*r2;
-fprintf("\nThe generated rotor is: %s",r);
-fprintf("\nIs rotor func working: %d", islogical(r == (0.92388*e0 + 0.38268*e12)));
+fpr("The generated rotor is: ",r);
+disp("Is rotor func working?", r == (-0.8733*e0 + 0.48717*e12));
 
 % % Testing the projections
 x = 1*e1+1*e2;
@@ -22,4 +22,4 @@ disp(x_ga);
 fprintf("\nFunctions working?: \n")
 
 % Function works if their wedge product should be zero. 
-disp(wedge(x,x_ga)==0); % disp(eq(x,x_ga));
+disp(wedge(x,x_ga)); % disp(eq(x,x_ga));

@@ -13,10 +13,6 @@ tool.up = @up;
 
 %   Function: down,projecting CGA --> GA
 tool.down = @down;
-
-%   Function: homo,homogenize a CGA vector 
-tool.homo = @homo;
-
 end
 
 
@@ -43,12 +39,12 @@ end
 function mv = homo(mv_conformal)
     %Normalizing the input mv_conformal
     mv_conformal = unit(mv_conformal);
-    mv = mv_conformal/left_contraction(-mv_conformal,ei);
+    mv = mv_conformal/left_contraction(-mv_conformal,einf);
 end
 
 % Projection from CGA to GA
 function mv = down(mv_conformal)
     %Normalizing the input mv
     mv_conformal = unit(mv_conformal);
-    mv = wedge(homo(mv_conformal),E)*E; % where E = wedge(ei,eo);
+    mv = wedge(homo(a),E*)*E; % where E = wedge(ei,eo);
 end

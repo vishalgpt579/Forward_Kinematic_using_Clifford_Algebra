@@ -112,7 +112,7 @@ disp('Initialising Clifford signature (3,0)')
 clifford_signature(3,0);
 
 a0 = 2; a1 = 2;
-theta0 = 0; theta1 = 45; theta2 = 35;
+theta0 = 0; theta1 = 30; theta2 = -45;
 
 fprintf('R _|_ R || R configuration, with angles %d, %d & %d',theta0, theta1, theta2);
 

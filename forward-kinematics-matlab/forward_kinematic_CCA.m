@@ -1,29 +1,33 @@
 %% FK using CCA (NOT WORKING!!!)
-
+clear all;clc;
 % Initialising conformal signature (3,0)
 % Initialising Clifford  signature (4,1)
 conformal_signature(3,0);
 tool = clifford_tools_local;
+
 % λ value:  1
-% Origin:   eo = - 0.7071 e4    + 0.7071 e5
+% Origin:   eo = - 0.7071 e4    + 0.7071 e5;
+%e0 = -0.7071*e4+0.7071*e5; % redifing it for proper 
 % Infinity: e∞ = 0.7071 e4    + 0.7071 e5   = ei
+% einf = (0.707*e4+0.07071*e5);
 % Bivector: E  = 0.7071 e4    + 0.7071 e5 
 
 a0 = 2; a1 = 2;
-theta0 = 0; theta1 = 45; theta2 = 35;
+theta0 = 0; theta1 = 30; theta2 = -45;
 
 fprintf('R _|_ R || R configuration, with angles %d, %d & %d',theta0, theta1, theta2);
 
 R0 = tool.rotor(deg2rad(theta0),e1,e3);
 R1 = tool.rotor(deg2rad(theta1),e1,e2);
-T1 = 1 - 0.5*a0*(e1*ei); % or T1 = 1-0.5*(e1*(0.7071*e4+0.7071*e5))
+T1 = 1 + ei*(a0*e1)/2; % T1 = 1-0.5*a0*(e1*(0.7071*e4+0.7071*e5)); % or % T1 = 1 - 0.5*a0*(e1*einf);
 R2 = tool.rotor(deg2rad(theta2),e1,e2);
-T2 = 1 - 0.5*a1*(e1*ei);
+T2 = 1 + ei*(a1*e1)/2; % or T2 = 1 - 0.5*a1*(e1*ei); or % T2 = 1 - 0.5*a1*(e1*einf);
 R = R0*R1*T1*R2*T2;
 
-EE = tool.down(R*tool.up(eo)*reverse(R));
+EE = R*tool.up(0)*reverse(R);
+ee = tool.down(EE);
 fprintf("\nThe End-effector is at: ");
-disp(EE);
+disp(ee);
 
 %% Functions
 % % Defining a rotor
