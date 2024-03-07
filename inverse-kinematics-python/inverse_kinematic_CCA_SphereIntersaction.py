@@ -61,14 +61,15 @@ def main():
 		elb = up(l1*down(EE).normal())
 
 	## Get the angles
-	L1 = (elb^EE^einf).normal() #(elb.normal()^EE^einf).normal() 
-	L2 = (elb^eo^einf).normal() 
+	L1 = (elb^EE^einf).dual().normal() #L1 = (up(elb)^up(EE)^einf).dual().normal() 
+	L2 = (up(0)^elb^einf).dual().normal() 
 	L1proj = ((L1|(Cbase^einf))|(Cbase^einf)).normal()
 	downt = down(EE).normal()
 	t0 = np.arctan2(float((downt|e3)(0)), float((downt|e1)(0)))
 	print(L2|L1proj)
-	t1 = np.arccos(float((L2|L1proj)(0)))
-	t2 = np.arccos(float((L1|L2)(0)))
+	t1 = np.arccos(float((L2|L1proj)(0))) ## NOT WORKING
+	t2 = np.arccos(float((L1|L2)(0))) ## NOT WORKING but should work. 
+	# t1 = # WORKING 
 
 	print("Expected values of theta0:{}, theta1:{} & theta2:{}".format(np.rad2deg(theta0),np.rad2deg(theta1),np.rad2deg(theta2)))
 	print("Obtained values of theta0:{}, theta1:{} & theta2:{}".format(np.rad2deg(t0),np.rad2deg(t1),np.rad2deg(t2)))

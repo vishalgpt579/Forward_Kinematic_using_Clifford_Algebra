@@ -22,9 +22,9 @@ def main():
 	
 	l1 = 2 # units length
 	l2 = 2 # units length
-	theta0 = np.radians(45)
-	theta1 = np.radians(30)
-	theta2 = np.radians(-45)
+	theta0 = np.radians(0)
+	theta1 = np.radians(45)
+	theta2 = np.radians(45)
 	## Assuming our base of the robot is at origin
 	#Cbase = up(0*e1+0*e2+0*e3) 
 
@@ -41,7 +41,9 @@ def main():
 	## Turns out a circle. 
 
 	## Giving the EE some position value.
-	EE = (2.59077^e1) + (0.48236^e2) + (2.59077^e3)
+	EE = (1.41421^e1) + (3.41421^e2) #theta={0,45,45}
+	# EE =(2.59077^e1) + (0.48236^e2) + (2.59077^e3)  #theta={45,30,-45}
+	# EE = (3.6639^e1) + (0.48236^e2) # theta={0,30,-45}
 	## Storing Psuedoscalar in varible for simplicity
 	I = G3c.pseudoScalar #e12345
 
@@ -68,10 +70,11 @@ def main():
 	'''
 
 	## Generating a plane that passes through the eo, e3 & EE  
-	plane = eo^up(e3)^EE^einf
+	plane = eo^up(e3)^up(EE)^einf
 
 	## Generating the constrains
 	if plane == 0:
+		print("\nthe end effector lies on the X-Y plane.")
 		constrain = C 
 		## the generated plane = 0 iff EE = constant x e3
 		## E.g)
@@ -85,14 +88,15 @@ def main():
 
 	######## Second: Computing the angles #######
 	
-	print("Highest Grades within the generated plane",plane.grades())
+	print("\nHighest Grades within the generated plane",plane.grades())
 
 	if plane.grades() == {3}:
 		print("the end effector lies on the Z axis.")
 		t0 = np.radians(0)
+		R0 = generate_rotation_rotor(t0,e1,e3)
 
 		## Elbow's pose aka X(can be 2 points, since circle & plane = 2 solutions)
-		X = constrain &  (eo^up(e3)^up(e1)^einf) # remove the rotation from x, intersect it with the plane of the links
+		X = constrain & (eo^up(e3)^up(e1)^einf) # remove the rotation from x, intersect it with the plane of the links
 
 	else:
 		t0 = np.arctan2(EE[(3,)],EE[(1,)]) 
@@ -101,11 +105,13 @@ def main():
 		# X = R0 * (constrain * ~R) ## Or same as below
 		X = apply_rotor(constrain,~R0)
 
+	print("\nValues of intersaction:{} ".format(X))
 	# project out one end of the point-pair
-	x = (1 - X.normal()) * (X | einf)
+	x = (1 - X.normal()) * (X | einf) # 1 - (Pose/||Pose||^2)*(Pose.einf)
 
 	x_down = down(x)
-	t1 = np.arctan2(x_down[(2,)], x_down[(1,)])
+
+	t1 = np.arctan2(x_down[(2,)],x_down[(1,)])
 	#Update the rotors
 	R1 = generate_rotation_rotor(t1,e1,e2) ## Shoulder--> Upper
 
@@ -124,8 +130,9 @@ def main():
 	Rl2 = 1 - 0.5*l2*(e1^einf)
 	R = R02 * Rl2
 
-
-	print("Expected values of theta0:{}, theta1:{} & theta2:{}".format(np.rad2deg(theta0),np.rad2deg(theta1),np.rad2deg(theta2)))
+	print("\n\nSet End-Effector's Pose: ",EE)
+	print("Elbow Pose: ",x_down)
+	print("\nExpected values of theta0:{}, theta1:{} & theta2:{}".format(np.rad2deg(theta0),np.rad2deg(theta1),np.rad2deg(theta2)))
 	print("Obtained values of theta0:{}, theta1:{} & theta2:{}".format(np.rad2deg(t0),np.rad2deg(t1),np.rad2deg(t2)))
 
 	# print("Generated Rotor: ", R)

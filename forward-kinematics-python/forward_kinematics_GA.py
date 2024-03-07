@@ -30,8 +30,8 @@ def main():
 	l1 = 2 # units length
 	l2 = 2 # units length
 	theta0 = np.radians(0)
-	theta1 = np.radians(45)
-	theta2 = np.radians(30)
+	theta1 = np.radians(30)
+	theta2 = np.radians(-45)
 
 	print("\n\nTesting R configuration with angle {0} and rotation about plane {1}...".format(30,e1^e2))
 	R0 = generate_rotation_rotor(theta0,e1,e2)
@@ -78,6 +78,7 @@ def main():
 	R1 = generate_rotation_rotor(theta1,e1,e2)
 	R01 = R0*R1
 	EE1 = R01*(l1*e1)*R01.inv()
+	print("Elbow Pose: ",EE1)
 
 	R2 = generate_rotation_rotor(theta2,e1,e2)
 	R02 = R01*R2

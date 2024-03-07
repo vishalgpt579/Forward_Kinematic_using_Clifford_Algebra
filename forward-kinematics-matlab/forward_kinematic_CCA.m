@@ -13,7 +13,7 @@ tool = clifford_tools_local;
 % Bivector: E  = 0.7071 e4    + 0.7071 e5 
 
 a0 = 2; a1 = 2;
-theta0 = 0; theta1 = 30; theta2 = -45;
+theta0 = 45; theta1 = 30; theta2 = -45;
 
 fprintf('R _|_ R || R configuration, with angles %d, %d & %d',theta0, theta1, theta2);
 

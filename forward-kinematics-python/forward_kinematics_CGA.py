@@ -21,22 +21,25 @@ def main():
 	l0 = 2 # units length
 	l1 = 2 # units length
 	l2 = 2 # units length
-	theta0 = np.radians(45)
+	theta0 = np.radians(0)
 	theta1 = np.radians(30)
 	theta2 = np.radians(-45)
 
 	print("\nTesting R _|_ R || R configuration similar to Clifford API docs...")
+	print("\nValues of theta0: {}, theta1: {} & theta2: {}".format(np.rad2deg(theta0),np.rad2deg(theta1),np.rad2deg(theta2)))
 	R0 = generate_rotation_rotor(theta0,e1,e3)
 	R1 = generate_rotation_rotor(theta1,e1,e2)
 	Rl1 = 1 - 0.5*l1*(e1^einf)
 	R2 = generate_rotation_rotor(theta2,e1,e2)
 	Rl2 = 1 - 0.5*l2*(e1^einf)
 	R = R0*R1*Rl1*R2*Rl2
-	EE = down(R*up(eo)*~R) 
+	EE = down(R*eo*~R) 
 	# EE2 = down(apply_rotor(up(eo),R))
-	print("The end-effector for R_|_R || R Config is at: ",EE)
-	# print("The resultant rotor: \n",R)
+	print("\nThe end-effector for R_|_R || R Config is at: ",EE)
+	print("\nThe resultant rotor: \n",R)
 	# print("Using inbuild func, EE: ",EE2) ## Same as EE
+	R_X = R0*R1*Rl1 ## Elbow rotor
+	print("\nElbow Pose: ",down(apply_rotor(up(eo),R_X)))
 
 
 if __name__ == '__main__':
